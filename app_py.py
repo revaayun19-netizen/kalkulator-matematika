@@ -11,8 +11,10 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("🧠 MathMaster Calculator")
-st.write("Kalkulator Matematika Interaktif Berbasis Python dan Streamlit")
+st.markdown("""
+### 🧠 Selamat Datang di MathMaster Calculator
+Temukan cara cepat dan mudah untuk menyelesaikan berbagai persoalan matematika.
+""")
 
 st.sidebar.title("📚 Menu")
 menu = st.sidebar.selectbox(
