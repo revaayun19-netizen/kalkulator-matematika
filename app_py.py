@@ -1,6 +1,10 @@
+```python
 import streamlit as st
 import math
 
+# =========================
+# KONFIGURASI HALAMAN
+# =========================
 st.set_page_config(
     page_title="🧠 MathMaster Calculator",
     page_icon="🧠",
@@ -10,28 +14,26 @@ st.set_page_config(
 # =========================
 # HEADER
 # =========================
-
 st.title("🧠 MathMaster Calculator")
 
 st.markdown("""
-### 🚀 Selamat Datang di MathMaster Calculator
+## 🎯 Matematika Jadi Lebih Mudah!
 
-Aplikasi matematika multifungsi yang membantu Anda menyelesaikan berbagai perhitungan dengan cepat dan mudah.
+Selamat datang di **MathMaster Calculator**, aplikasi matematika interaktif
+yang membantu Anda menghitung sekaligus memahami langkah penyelesaiannya.
 
-💡 **Fitur yang tersedia:**
-- ➕ Operasi Dasar
-- 🔢 Faktorial
-- 📊 Permutasi & Kombinasi
-- 📈 Pangkat & Akar
-- 📐 FPB & KPK
+### 📚 Fitur yang Tersedia
+✅ Operasi Dasar  
+✅ Faktorial  
+✅ Permutasi & Kombinasi  
+✅ Pangkat & Akar  
+✅ FPB & KPK
 """)
 
 # =========================
 # SIDEBAR
 # =========================
-
 with st.sidebar:
-    st.image("https://cdn-icons-png.flaticon.com/512/2103/2103633.png", width=120)
 
     st.title("📚 Menu")
 
@@ -60,7 +62,6 @@ with st.sidebar:
 # =========================
 # BERANDA
 # =========================
-
 if menu == "🏠 Beranda":
 
     col1, col2, col3 = st.columns(3)
@@ -76,64 +77,64 @@ if menu == "🏠 Beranda":
 
     st.markdown("---")
 
-    st.info("""
-    🎯 **Tujuan Aplikasi**
-
-    MathMaster Calculator dibuat untuk membantu siswa dan mahasiswa
-    melakukan berbagai perhitungan matematika secara cepat, mudah,
-    dan interaktif.
-    """)
-
     st.success("""
+    Selamat datang di MathMaster Calculator.
     Gunakan menu di sebelah kiri untuk memilih fitur yang ingin digunakan.
     """)
 
 # =========================
 # OPERASI DASAR
 # =========================
-
 elif menu == "➕ Operasi Dasar":
 
     st.header("➕ Operasi Dasar")
 
-    a = st.number_input("Angka Pertama", value=0.0)
-    b = st.number_input("Angka Kedua", value=0.0)
+    a = st.number_input("Masukkan angka pertama", value=0.0)
+    b = st.number_input("Masukkan angka kedua", value=0.0)
 
     operasi = st.selectbox(
         "Pilih Operasi",
-        ["Tambah", "Kurang", "Kali", "Bagi"]
+        ["Penjumlahan", "Pengurangan", "Perkalian", "Pembagian"]
     )
 
-    if st.button("🔍 Hitung"):
+    if st.button("Hitung"):
 
-        if operasi == "Tambah":
+        if operasi == "Penjumlahan":
             hasil = a + b
+            simbol = "+"
 
-        elif operasi == "Kurang":
+        elif operasi == "Pengurangan":
             hasil = a - b
+            simbol = "-"
 
-        elif operasi == "Kali":
+        elif operasi == "Perkalian":
             hasil = a * b
+            simbol = "×"
 
         else:
             if b == 0:
-                st.error("Tidak dapat membagi dengan nol!")
+                st.error("Tidak dapat membagi dengan nol.")
                 st.stop()
 
             hasil = a / b
+            simbol = "÷"
 
-        st.success(f"🎉 Hasil = {hasil}")
+        st.success(f"Hasil = {hasil}")
+
+        st.subheader("📝 Langkah Penyelesaian")
+
+        st.write(f"{a} {simbol} {b}")
+        st.write(f"= {hasil}")
 
 # =========================
 # FAKTORIAL
 # =========================
-
 elif menu == "🔢 Faktorial":
 
     st.header("🔢 Faktorial")
 
     n = st.number_input(
-        "Masukkan Bilangan",
+        "Masukkan bilangan",
         min_value=0,
         step=1
     )
@@ -142,28 +143,49 @@ elif menu == "🔢 Faktorial":
 
         hasil = math.factorial(int(n))
 
-        st.success(f"🎉 {int(n)}! = {hasil}")
+        st.success(f"{int(n)}! = {hasil}")
+
+        st.subheader("📝 Langkah Penyelesaian")
+
+        if n == 0:
+            st.write("0! = 1")
+
+        else:
+            langkah = " × ".join(
+                [str(i) for i in range(int(n), 0, -1)]
+            )
+
+            st.write(f"{int(n)}! = {langkah}")
+            st.write(f"{int(n)}! = {hasil}")
 
 # =========================
 # PERMUTASI & KOMBINASI
 # =========================
-
 elif menu == "📊 Permutasi & Kombinasi":
 
     st.header("📊 Permutasi & Kombinasi")
 
-    n = st.number_input("Nilai n", min_value=0, step=1)
-    r = st.number_input("Nilai r", min_value=0, step=1)
+    n = st.number_input(
+        "Masukkan nilai n",
+        min_value=0,
+        step=1
+    )
+
+    r = st.number_input(
+        "Masukkan nilai r",
+        min_value=0,
+        step=1
+    )
 
     jenis = st.radio(
-        "Pilih",
+        "Pilih Perhitungan",
         ["Permutasi", "Kombinasi"]
     )
 
     if st.button("Hitung"):
 
         if r > n:
-            st.error("r tidak boleh lebih besar dari n")
+            st.error("Nilai r tidak boleh lebih besar dari n.")
 
         else:
 
@@ -171,45 +193,80 @@ elif menu == "📊 Permutasi & Kombinasi":
 
                 hasil = math.factorial(n) // math.factorial(n-r)
 
-                st.success(f"🎉 {n}P{r} = {hasil}")
+                st.success(f"{n}P{r} = {hasil}")
+
+                st.subheader("📝 Langkah Penyelesaian")
+
+                st.latex(r"P(n,r)=\frac{n!}{(n-r)!}")
+
+                st.latex(
+                    rf"P({n},{r})=\frac{{{n}!}}{{({n-r})!}}"
+                )
+
+                st.write(
+                    f"= {math.factorial(n)} ÷ {math.factorial(n-r)}"
+                )
+
+                st.write(f"= {hasil}")
 
             else:
 
                 hasil = math.factorial(n) // (
-                    math.factorial(r) *
-                    math.factorial(n-r)
+                    math.factorial(r)
+                    * math.factorial(n-r)
                 )
 
-                st.success(f"🎉 {n}C{r} = {hasil}")
+                st.success(f"{n}C{r} = {hasil}")
+
+                st.subheader("📝 Langkah Penyelesaian")
+
+                st.latex(r"C(n,r)=\frac{n!}{r!(n-r)!}")
+
+                st.latex(
+                    rf"C({n},{r})=\frac{{{n}!}}{{{r}!({n-r})!}}"
+                )
+
+                st.write(
+                    f"= {math.factorial(n)} ÷ ({math.factorial(r)} × {math.factorial(n-r)})"
+                )
+
+                st.write(f"= {hasil}")
 
 # =========================
 # PANGKAT & AKAR
 # =========================
-
 elif menu == "📈 Pangkat & Akar":
 
     st.header("📈 Pangkat & Akar")
 
     pilihan = st.radio(
-        "Pilih",
-        ["Pangkat", "Akar"]
+        "Pilih Perhitungan",
+        ["Pangkat", "Akar Kuadrat"]
     )
 
     if pilihan == "Pangkat":
 
-        angka = st.number_input("Angka")
-        pangkat = st.number_input("Pangkat", step=1)
+        angka = st.number_input("Masukkan angka")
+        pangkat = st.number_input(
+            "Masukkan pangkat",
+            step=1
+        )
 
         if st.button("Hitung Pangkat"):
 
             hasil = angka ** pangkat
 
-            st.success(f"🎉 Hasil = {hasil}")
+            st.success(f"Hasil = {hasil}")
+
+            st.subheader("📝 Langkah Penyelesaian")
+
+            st.write(f"{angka}^{int(pangkat)}")
+            st.write(f"= {hasil}")
 
     else:
 
         angka = st.number_input(
-            "Masukkan Angka Positif",
+            "Masukkan angka positif",
             min_value=0.0
         )
 
@@ -217,44 +274,70 @@ elif menu == "📈 Pangkat & Akar":
 
             hasil = math.sqrt(angka)
 
-            st.success(f"🎉 √{angka} = {hasil}")
+            st.success(f"√{angka} = {hasil}")
+
+            st.subheader("📝 Langkah Penyelesaian")
+
+            st.write(f"√{angka}")
+            st.write(f"= {hasil}")
 
 # =========================
 # FPB & KPK
 # =========================
-
 elif menu == "📐 FPB & KPK":
 
     st.header("📐 FPB & KPK")
 
     a = st.number_input(
-        "Bilangan Pertama",
+        "Masukkan bilangan pertama",
         min_value=1,
         step=1
     )
 
     b = st.number_input(
-        "Bilangan Kedua",
+        "Masukkan bilangan kedua",
         min_value=1,
         step=1
     )
 
     pilihan = st.radio(
-        "Pilih",
+        "Pilih Perhitungan",
         ["FPB", "KPK"]
     )
 
     if st.button("Hitung"):
 
+        a = int(a)
+        b = int(b)
+
         if pilihan == "FPB":
 
             hasil = math.gcd(a, b)
 
+            st.success(f"FPB({a},{b}) = {hasil}")
+
+            st.subheader("📝 Langkah Penyelesaian")
+
+            st.write(f"Bilangan pertama = {a}")
+            st.write(f"Bilangan kedua = {b}")
+            st.write(f"FPB({a},{b}) = {hasil}")
+
         else:
 
-            hasil = abs(a*b) // math.gcd(a, b)
+            fpb = math.gcd(a, b)
+            hasil = abs(a * b) // fpb
 
-        st.success(f"🎉 Hasil {pilihan} = {hasil}")
+            st.success(f"KPK({a},{b}) = {hasil}")
+
+            st.subheader("📝 Langkah Penyelesaian")
+
+            st.write(f"FPB({a},{b}) = {fpb}")
+            st.write(f"KPK = ({a} × {b}) ÷ {fpb}")
+            st.write(f"KPK = {a*b} ÷ {fpb}")
+            st.write(f"KPK = {hasil}")
+
+
+```
 
 # =========================
 # FOOTER
@@ -265,10 +348,10 @@ st.info("""
 ### 👥 Kelompok 4
 
 **Anggota:**
-- Septi
-- Reva
-- Nafis
-- Ovita
+- Septi Novalena
+- Reva Ayun Labibah
+- Nur Mustafiatun Nafisah
+- Ovita Dwi Saputri
 """)
 
 st.caption("🧠 MathMaster Calculator | Dikembangkan oleh Kelompok 4")
