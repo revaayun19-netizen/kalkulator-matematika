@@ -326,19 +326,5 @@ elif menu == "📐 FPB & KPK":
             st.write(f"KPK = {hasil}")
 
 
-# =========================
-# FOOTER
-# =========================
-st.markdown("---")
-
-st.info("""
-### 👥 Kelompok 4
-
-**Anggota:**
-- Septi Novalena
-- Reva Ayun Labibah
-- Nur Mustafiatun Nafisah
-- Ovita Dwi Saputri
-""")
 
 st.caption("🧠 MathMaster Calculator | Dikembangkan oleh Kelompok 4")
