@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="🧠",
     layout="centered"
 )
-
+st.title("🧠 MathMaster Calculator")
 st.markdown("""
 ### 🧠 Selamat Datang di MathMaster Calculator
 Temukan cara cepat dan mudah untuk menyelesaikan berbagai persoalan matematika.
